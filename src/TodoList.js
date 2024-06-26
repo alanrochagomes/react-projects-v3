@@ -105,8 +105,16 @@ class TodoList extends Component {
   };
 
   render() {
-    const { todos, newTodo, editIndex, editText, title, editTitle, commentIndex, commentText } =
-      this.state;
+    const {
+      todos,
+      newTodo,
+      editIndex,
+      editText,
+      title,
+      editTitle,
+      commentIndex,
+      commentText,
+    } = this.state;
 
     return (
       <div className="App-header">
