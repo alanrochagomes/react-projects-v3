@@ -299,7 +299,7 @@ class TodoList extends Component {
                       onClick={this.handleCancelComment}
                       className="comment-button"
                     >
-                      Cancel
+                      ❌
                     </button>
                   </div>
                 )}
@@ -349,7 +349,7 @@ class TodoList extends Component {
                                 }
                                 className="action-button"
                               >
-                                Edit
+                                ✏️
                               </button>
                               <button
                                 onClick={() =>
@@ -357,7 +357,7 @@ class TodoList extends Component {
                                 }
                                 className="action-button"
                               >
-                                Delete
+                                🗑️
                               </button>
                             </div>
                           </div>
@@ -372,8 +372,8 @@ class TodoList extends Component {
                     className="toggle-comments-button"
                   >
                     {showCommentsIndex === index
-                      ? "Hide Comments"
-                      : "Show Comments"}
+                      ? "🔓"
+                      : "🔒"}
                   </button>
                 )}
               </li>

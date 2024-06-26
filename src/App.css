@@ -116,9 +116,9 @@
 }
 
 .comment-container {
-  margin-top: 10px;
   display: flex;
-  flex-direction: column;
+  justify-content: flex-end;
+  margin-top: 10px;
 }
 
 .comment-input {
@@ -132,20 +132,29 @@
 .comment-button {
   padding: 10px;
   font-size: 16px;
-  border: none;
+  border: 1px solid #dee2e6;
   border-radius: 4px;
-  cursor: pointer;
-  margin-right: 5px;
+  margin-bottom: 10px;
 }
 
 .comment-button:first-of-type {
-  background-color: #007bff;
-  color: #fff;
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  margin-top: 10px;
+  padding: 5px;
+  font-size: 14px;
 }
 
 .comment-button:last-of-type {
-  background-color: #dc3545;
-  color: #fff;
+  background: none;
+  border: none;
+  color: #ff0015;
+  cursor: pointer;
+  margin-top: 10px;
+  padding: 5px;
+  font-size: 14px;
 }
 
 .comments-list {
