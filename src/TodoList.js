@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import "./App.css"; // Certifique-se de importar o arquivo CSS
-import deleteSound from "./assets/delete_sound.mp3"; // Importe o arquivo de som
+import "./App.css";
+import deleteSound from "./assets/delete_sound.mp3";
 
 class TodoList extends Component {
   constructor(props) {
@@ -17,6 +17,7 @@ class TodoList extends Component {
       showCommentsIndex: null,
       editCommentIndex: null,
       editCommentText: "",
+      isEditing: false, // Novo estado para controlar a edição
     };
     this.audioRef = React.createRef();
   }
@@ -56,11 +57,11 @@ class TodoList extends Component {
   };
 
   startEdit = (index, text) => {
-    this.setState({ editIndex: index, editText: text });
+    this.setState({ editIndex: index, editText: text, isEditing: true });
   };
 
   cancelEdit = () => {
-    this.setState({ editIndex: -1, editText: "" });
+    this.setState({ editIndex: -1, editText: "", isEditing: false });
   };
 
   saveEdit = (index) => {
@@ -68,7 +69,7 @@ class TodoList extends Component {
     if (editText.trim() !== "") {
       const newTodos = [...todos];
       newTodos[index].text = editText.trim();
-      this.setState({ todos: newTodos, editIndex: -1, editText: "" });
+      this.setState({ todos: newTodos, editIndex: -1, editText: "", isEditing: false });
     }
   };
 
@@ -169,6 +170,7 @@ class TodoList extends Component {
       showCommentsIndex,
       editCommentIndex,
       editCommentText,
+      isEditing, // Novo estado para controlar a edição
     } = this.state;
 
     return (
@@ -181,6 +183,9 @@ class TodoList extends Component {
 
         <div className="todo-container">
           <div className="todo-header">
+            {isEditing && (
+              <div className="editing-button">Editando...</div>
+            )}
             <h1
               className="todo-title"
               contentEditable={editTitle}
@@ -190,9 +195,7 @@ class TodoList extends Component {
             >
               {title}
             </h1>
-            <span onClick={this.handleEditTitle} className="edit-title">
-              Edit
-            </span>
+            <span onClick={this.handleEditTitle} className="edit-title"></span>
           </div>
 
           <div className="todo-input-container">
@@ -201,10 +204,10 @@ class TodoList extends Component {
               value={newTodo}
               onChange={(e) => this.setState({ newTodo: e.target.value })}
               className="todo-input"
-              placeholder="Add new task"
+              placeholder="Tasks"
             />
             <button onClick={this.handleAddTodo} className="add-button">
-              Add
+              Add new
             </button>
           </div>
 
@@ -299,7 +302,7 @@ class TodoList extends Component {
                       onClick={this.handleCancelComment}
                       className="comment-button"
                     >
-                      ❌
+                      Cancel
                     </button>
                   </div>
                 )}
@@ -371,9 +374,7 @@ class TodoList extends Component {
                     onClick={() => this.handleToggleComments(index)}
                     className="toggle-comments-button"
                   >
-                    {showCommentsIndex === index
-                      ? "🔓"
-                      : "🔒"}
+                    {showCommentsIndex === index ? "🔓" : "🔒"}
                   </button>
                 )}
               </li>

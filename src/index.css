@@ -17,7 +17,7 @@ input {
 }
 
 button {
-  background-color: #0069d9;
+  background-color: #98a2b3;
   color: #fff;
   padding: 10px;
   font-size: 16px;
@@ -27,5 +27,5 @@ button {
 }
 
 button:hover {
-  background-color: #0053a6;
+  background-color: #1d2939;
 }

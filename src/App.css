@@ -1,36 +1,43 @@
 .todo-container {
   max-width: 600px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 10px;
 }
 
 .todo-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  text-align: center;
+  position: relative;
 }
 
 .todo-title {
-  font-size: 24px;
+  font-size: 54px;
   cursor: pointer;
+  margin-bottom: 20px;
+  display: inline-block; /* Para permitir alinhamento vertical */
 }
 
 .edit-title {
+  display: inline-block;
   font-size: 14px;
-  color: #007bff;
   cursor: pointer;
+  position: absolute;
+  left: calc(100% + 10px); /* Posiciona à direita do título com margem */
+  top: 50%; /* Alinha verticalmente no meio */
+  transform: translateY(-50%);
 }
 
 .todo-input-container {
   display: flex;
-  margin-bottom: 20px;
+  align-items: center;
+  justify-content: center; /* Centraliza horizontalmente */
+  margin-bottom: 54px;
 }
 
 .todo-input {
   flex-grow: 1;
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #dee2e6;
+  border: 1px solid #b2b3b4;
   border-radius: 4px;
   margin-right: 10px;
 }
@@ -40,15 +47,19 @@
   font-size: 16px;
   border: none;
   border-radius: 4px;
-  background-color: #007bff;
+  background-color: #98a2b3;
   color: #fff;
   cursor: pointer;
+  height: 100%; /* Garante que a altura do botão corresponda à do input */
 }
 
 .todo-list {
   list-style-type: none;
   padding: 0;
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza os itens na lista */
 }
 
 .todo-item {
@@ -58,6 +69,8 @@
   border: 1px solid #dee2e6;
   border-radius: 4px;
   margin-bottom: 10px;
+  width: 100%; /* Permite que o item da lista ocupe a largura completa do contêiner */
+  max-width: 500px; /* Limita a largura máxima dos itens da lista */
 }
 
 .todo-content {
@@ -69,7 +82,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 1px solid #dee2e6;
+  border: 1px solid #98a2b3;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -80,7 +93,7 @@
 .todo-checkbox svg {
   width: 12px;
   height: 12px;
-  fill: #007bff;
+  fill: #98a2b3;
 }
 
 .todo-text {
@@ -94,9 +107,9 @@
 
 .edit-input {
   flex-grow: 1;
-  padding: 5px;
+  padding: 15px;
   font-size: 16px;
-  border: 1px solid #dee2e6;
+  border: 1px solid #d0d5dd;
   border-radius: 4px;
 }
 
@@ -124,7 +137,7 @@
 .comment-input {
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #dee2e6;
+  border: 1px solid #d0d5dd;
   border-radius: 4px;
   margin-bottom: 10px;
 }
@@ -140,7 +153,7 @@
 .comment-button:first-of-type {
   background: none;
   border: none;
-  color: #007bff;
+  color: #98a2b3;
   cursor: pointer;
   margin-top: 10px;
   padding: 5px;
@@ -150,7 +163,7 @@
 .comment-button:last-of-type {
   background: none;
   border: none;
-  color: #ff0015;
+  color: #98a2b3;
   cursor: pointer;
   margin-top: 10px;
   padding: 5px;
@@ -180,10 +193,10 @@
 .toggle-comments-button {
   background: none;
   border: none;
-  color: #007bff;
+  color: #98a2b3;
   cursor: pointer;
   margin-top: 10px;
-  padding: 5px;
+  padding: 1px;
   font-size: 14px;
 }
 
@@ -197,3 +210,16 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.editing-button {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1D2939;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
