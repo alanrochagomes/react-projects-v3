@@ -1,0 +1,102 @@
+/* App.css */
+.App-header {
+  text-align: left;
+  padding: 20px;
+}
+
+.App-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.todo-container {
+  margin-bottom: 20px;
+}
+
+.todo-item {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo-header-text {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.round-checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.todo-text {
+  flex-grow: 1;
+  font-size: 16px;
+}
+
+.button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.button-comment {
+  color: #6A5ACD;
+}
+
+.button-delete {
+  color: #ff6347;
+}
+
+.comment-section {
+  margin-top: 10px;
+}
+
+.comment-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.button-save,
+.button-cancel {
+  padding: 10px;
+  font-size: 14px;
+  margin-right: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.button-save {
+  background-color: #6A5ACD;
+  color: #fff;
+}
+
+.button-cancel {
+  background-color: #ff6347;
+  color: #fff;
+}
