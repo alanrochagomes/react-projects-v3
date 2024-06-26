@@ -1,17 +1,7 @@
-.App {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f8f9fa;
-}
-
 .todo-container {
-  width: 400px;
+  max-width: 600px;
+  margin: 0 auto;
   padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .todo-header {
@@ -21,20 +11,19 @@
 }
 
 .todo-title {
-  margin: 0;
   font-size: 24px;
-  font-weight: bold;
+  cursor: pointer;
 }
 
 .edit-title {
-  cursor: pointer;
   font-size: 14px;
-  color: #6c757d;
+  color: #007bff;
+  cursor: pointer;
 }
 
 .todo-input-container {
   display: flex;
-  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .todo-input {
@@ -47,17 +36,13 @@
 }
 
 .add-button {
-  padding: 10px 15px;
+  padding: 10px;
   font-size: 16px;
-  color: #fff;
-  background-color: #007bff;
   border: none;
   border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
   cursor: pointer;
-}
-
-.add-button:hover {
-  background-color: #0056b3;
 }
 
 .todo-list {
@@ -174,4 +159,32 @@
   background-color: #f1f3f5;
   border-radius: 4px;
   margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment-actions {
+  display: flex;
+}
+
+.toggle-comments-button {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  margin-top: 10px;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.edit-comment-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

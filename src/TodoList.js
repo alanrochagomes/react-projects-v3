@@ -14,6 +14,9 @@ class TodoList extends Component {
       title: "Booking Movie Tickets",
       commentIndex: -1,
       commentText: "",
+      showCommentsIndex: null,
+      editCommentIndex: null,
+      editCommentText: "",
     };
     this.audioRef = React.createRef();
   }
@@ -22,7 +25,10 @@ class TodoList extends Component {
     const { newTodo, todos } = this.state;
     if (newTodo.trim() !== "") {
       this.setState({
-        todos: [...todos, { text: newTodo.trim(), checked: false, comments: [] }],
+        todos: [
+          ...todos,
+          { text: newTodo.trim(), checked: false, comments: [] },
+        ],
         newTodo: "",
       });
     }
@@ -84,7 +90,11 @@ class TodoList extends Component {
   };
 
   handleComment = (index) => {
-    this.setState({ commentIndex: index, commentText: "" });
+    this.setState((prevState) => ({
+      commentIndex: prevState.commentIndex === index ? -1 : index,
+      commentText: "",
+      showCommentsIndex: index,
+    }));
   };
 
   handleCommentChange = (event) => {
@@ -104,13 +114,70 @@ class TodoList extends Component {
     this.setState({ commentIndex: -1, commentText: "" });
   };
 
+  handleToggleComments = (index) => {
+    this.setState((prevState) => ({
+      showCommentsIndex: prevState.showCommentsIndex === index ? null : index,
+    }));
+  };
+
+  handleEditComment = (todoIndex, commentIndex, commentText) => {
+    this.setState({
+      editCommentIndex: commentIndex,
+      editCommentText: commentText,
+      showCommentsIndex: todoIndex,
+    });
+  };
+
+  handleEditCommentChange = (event) => {
+    this.setState({ editCommentText: event.target.value });
+  };
+
+  handleSaveEditedComment = (todoIndex, commentIndex) => {
+    const { editCommentText, todos } = this.state;
+    if (editCommentText.trim() !== "") {
+      const newTodos = [...todos];
+      newTodos[todoIndex].comments[commentIndex] = editCommentText.trim();
+      this.setState({
+        todos: newTodos,
+        editCommentIndex: null,
+        editCommentText: "",
+      });
+    }
+  };
+
+  handleDeleteComment = (todoIndex, commentIndex) => {
+    const { todos } = this.state;
+    const newTodos = [...todos];
+    newTodos[todoIndex].comments.splice(commentIndex, 1);
+    this.setState({ todos: newTodos });
+  };
+
+  handleCancelEditComment = () => {
+    this.setState({ editCommentIndex: null, editCommentText: "" });
+  };
+
   render() {
-    const { todos, newTodo, editIndex, editText, title, editTitle, commentIndex, commentText } =
-      this.state;
+    const {
+      todos,
+      newTodo,
+      editIndex,
+      editText,
+      title,
+      editTitle,
+      commentIndex,
+      commentText,
+      showCommentsIndex,
+      editCommentIndex,
+      editCommentText,
+    } = this.state;
 
     return (
       <div className="App">
-        <audio ref={this.audioRef} src={deleteSound} style={{ display: "none" }} />
+        <audio
+          ref={this.audioRef}
+          src={deleteSound}
+          style={{ display: "none" }}
+        />
 
         <div className="todo-container">
           <div className="todo-header">
@@ -145,19 +212,26 @@ class TodoList extends Component {
             {todos.map((todo, index) => (
               <li key={index} className="todo-item">
                 <div className="todo-content">
-                  <div className="todo-checkbox" onClick={() => this.handleToggleTodo(index)}>
+                  <div
+                    className="todo-checkbox"
+                    onClick={() => this.handleToggleTodo(index)}
+                  >
                     {todo.checked && (
                       <svg viewBox="0 0 24 24" className="checkmark">
                         <path d="M9 16.2l-3.5-3.5c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4.2 4.2c.2.2.5.3.7.3s.5-.1.7-.3l8.1-8.1c.4-.4.4-1 0-1.4s-1-.4-1.4 0L9 16.2z"></path>
                       </svg>
                     )}
                   </div>
-                  <span className={`todo-text ${todo.checked ? "checked" : ""}`}>
+                  <span
+                    className={`todo-text ${todo.checked ? "checked" : ""}`}
+                  >
                     {editIndex === index ? (
                       <input
                         type="text"
                         value={editText}
-                        onChange={(e) => this.setState({ editText: e.target.value })}
+                        onChange={(e) =>
+                          this.setState({ editText: e.target.value })
+                        }
                         className="edit-input"
                       />
                     ) : (
@@ -169,22 +243,37 @@ class TodoList extends Component {
                 <div className="todo-actions">
                   {editIndex === index ? (
                     <>
-                      <button onClick={() => this.saveEdit(index)} className="action-button">
+                      <button
+                        onClick={() => this.saveEdit(index)}
+                        className="action-button"
+                      >
                         Save
                       </button>
-                      <button onClick={this.cancelEdit} className="action-button">
+                      <button
+                        onClick={this.cancelEdit}
+                        className="action-button"
+                      >
                         Cancel
                       </button>
                     </>
                   ) : (
                     <>
-                      <button onClick={() => this.startEdit(index, todo.text)} className="action-button">
+                      <button
+                        onClick={() => this.startEdit(index, todo.text)}
+                        className="action-button"
+                      >
                         ✏️
                       </button>
-                      <button onClick={() => this.handleComment(index)} className="action-button">
+                      <button
+                        onClick={() => this.handleComment(index)}
+                        className="action-button"
+                      >
                         💬
                       </button>
-                      <button onClick={() => this.handleDeleteTodo(index)} className="action-button">
+                      <button
+                        onClick={() => this.handleDeleteTodo(index)}
+                        className="action-button"
+                      >
                         🗑️
                       </button>
                     </>
@@ -200,23 +289,92 @@ class TodoList extends Component {
                       className="comment-input"
                       placeholder="Add a comment"
                     />
-                    <button onClick={() => this.handleSaveComment(index)} className="comment-button">
+                    <button
+                      onClick={() => this.handleSaveComment(index)}
+                      className="comment-button"
+                    >
                       Save
                     </button>
-                    <button onClick={this.handleCancelComment} className="comment-button">
+                    <button
+                      onClick={this.handleCancelComment}
+                      className="comment-button"
+                    >
                       Cancel
                     </button>
                   </div>
                 )}
 
-                {todo.comments && todo.comments.length > 0 && (
+                {showCommentsIndex === index && todo.comments.length > 0 && (
                   <ul className="comments-list">
-                    {todo.comments.map((comment, i) => (
-                      <li key={i} className="comment-item">
-                        {comment}
+                    {todo.comments.map((comment, commentIndex) => (
+                      <li key={commentIndex} className="comment-item">
+                        {editCommentIndex === commentIndex ? (
+                          <div className="edit-comment-container">
+                            <input
+                              type="text"
+                              value={editCommentText}
+                              onChange={this.handleEditCommentChange}
+                              className="comment-input"
+                              placeholder="Edit your comment"
+                            />
+                            <button
+                              onClick={() =>
+                                this.handleSaveEditedComment(
+                                  index,
+                                  commentIndex
+                                )
+                              }
+                              className="comment-button"
+                            >
+                              Save
+                            </button>
+                            <button
+                              onClick={this.handleCancelEditComment}
+                              className="comment-button"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        ) : (
+                          <div className="comment-content">
+                            <span>{comment}</span>
+                            <div className="comment-actions">
+                              <button
+                                onClick={() =>
+                                  this.handleEditComment(
+                                    index,
+                                    commentIndex,
+                                    comment
+                                  )
+                                }
+                                className="action-button"
+                              >
+                                Edit
+                              </button>
+                              <button
+                                onClick={() =>
+                                  this.handleDeleteComment(index, commentIndex)
+                                }
+                                className="action-button"
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          </div>
+                        )}
                       </li>
                     ))}
                   </ul>
+                )}
+                {todo.comments.length > 0 && (
+                  <button
+                    onClick={() => this.handleToggleComments(index)}
+                    className="toggle-comments-button"
+                  >
+                    {showCommentsIndex === index
+                      ? "Hide Comments"
+                      : "Show Comments"}
+                  </button>
                 )}
               </li>
             ))}
