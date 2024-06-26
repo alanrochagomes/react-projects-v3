@@ -126,6 +126,7 @@ class TodoList extends Component {
       editCommentIndex: commentIndex,
       editCommentText: commentText,
       showCommentsIndex: todoIndex,
+      isEditing: true, // Atualiza o estado para indicar que está editando
     });
   };
 
@@ -142,6 +143,7 @@ class TodoList extends Component {
         todos: newTodos,
         editCommentIndex: null,
         editCommentText: "",
+        isEditing: false, // Atualiza o estado para indicar que terminou a edição
       });
     }
   };
@@ -154,7 +156,7 @@ class TodoList extends Component {
   };
 
   handleCancelEditComment = () => {
-    this.setState({ editCommentIndex: null, editCommentText: "" });
+    this.setState({ editCommentIndex: null, editCommentText: "", isEditing: false });
   };
 
   render() {
@@ -184,7 +186,7 @@ class TodoList extends Component {
         <div className="todo-container">
           <div className="todo-header">
             {isEditing && (
-              <div className="editing-button">Editando...</div>
+              <div className="editing-button">Editing...</div>
             )}
             <h1
               className="todo-title"

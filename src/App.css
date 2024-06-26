@@ -121,11 +121,18 @@
 
 .action-button {
   padding: 5px 10px;
-  font-size: 14px;
-  border: none;
-  border-radius: 4px;
+  margin-right: 5px;
+  background-color: #98A2B3;
+  border: 1px solid #ccc;
   cursor: pointer;
-  margin-left: 5px;
+  transition: all 0.3s ease;
+}
+
+.action-button.editing {
+  /* Estilos quando o botão está em modo de edição */
+  width: calc(100% - 100px); /* Ajuste a largura conforme necessário */
+  margin-right: 0;
+  text-align: center;
 }
 
 .comment-container {
