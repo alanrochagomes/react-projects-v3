@@ -69,7 +69,12 @@ class TodoList extends Component {
     if (editText.trim() !== "") {
       const newTodos = [...todos];
       newTodos[index].text = editText.trim();
-      this.setState({ todos: newTodos, editIndex: -1, editText: "", isEditing: false });
+      this.setState({
+        todos: newTodos,
+        editIndex: -1,
+        editText: "",
+        isEditing: false,
+      });
     }
   };
 
@@ -156,7 +161,11 @@ class TodoList extends Component {
   };
 
   handleCancelEditComment = () => {
-    this.setState({ editCommentIndex: null, editCommentText: "", isEditing: false });
+    this.setState({
+      editCommentIndex: null,
+      editCommentText: "",
+      isEditing: false,
+    });
   };
 
   render() {
@@ -185,9 +194,7 @@ class TodoList extends Component {
 
         <div className="todo-container">
           <div className="todo-header">
-            {isEditing && (
-              <div className="editing-button">Editing...</div>
-            )}
+            {isEditing && <div className="editing-button">Editing...</div>}
             <h1
               className="todo-title"
               contentEditable={editTitle}
